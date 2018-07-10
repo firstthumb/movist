@@ -1,0 +1,46 @@
+
+ext {
+    kotlinVersion = '1.2.41'
+    protobufVersion = '3.5.1-1'
+    grpcVersion = '1.13.1'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/release" }
+    }
+
+    dependencies {
+        classpath('com.google.protobuf:protobuf-gradle-plugin:0.8.6')
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+}
+
+apply plugin: 'com.google.protobuf'
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+        grpckotlin {
+            artifact = "io.rouz:grpc-kotlin-gen:0.0.2:jdk8@jar"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+            grpckotlin {}
+        }
+    }
+}

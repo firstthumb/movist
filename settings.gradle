@@ -1,0 +1,5 @@
+rootProject.name = 'movist'
+
+include 'movie-service', 'review-service'
+include 'common'
+

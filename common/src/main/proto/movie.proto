@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.ekocaman.movist.movie.service;
+
+option java_multiple_files = true;
+option java_package = "com.ekocaman.movist.movie.service";
+option java_outer_classname = "MovieServiceProtos";
+
+service MovieService {
+    rpc search(MovieServiceRequest) returns (MovieServiceResponse) {}
+}
+
+message MovieServiceRequest {
+    string searchKey = 1;
+    string year = 2;
+    string type = 3;
+}
+
+message MovieServiceResponse {
+    repeated MovieData search = 1;
+    string totalResults = 2;
+    string response = 3;
+}
+
+message MovieData {
+    string title = 1;
+    string year = 2;
+    string imdbID = 3;
+    string type = 4;
+    string poster = 5;
+}
