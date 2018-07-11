@@ -16,8 +16,8 @@ interface MovieService {
     @GET("/")
     fun searchMovies(
             @Query("s") searchKey: String,
-            @Query("y") year: String,
-            @Query("type") type: String): Observable<SearchResultResponse>
+            @Query("y") year: String?,
+            @Query("type") type: String?): Observable<SearchResultResponse>
 
     @GET("/")
     fun getMovie(
@@ -57,7 +57,7 @@ class MovieServiceImpl : MovieService, MovieServiceGrpc.MovieServiceImplBase() {
 
     val service: MovieService = MovieService.Factory.create()
 
-    override fun searchMovies(searchKey: String, year: String, type: String): Observable<SearchResultResponse> {
+    override fun searchMovies(searchKey: String, year: String?, type: String?): Observable<SearchResultResponse> {
         return service.searchMovies(searchKey, year, type)
     }
 
