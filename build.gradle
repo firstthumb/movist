@@ -136,3 +136,9 @@ project(':review-service') {
 
     }
 }
+
+project(':user-service') {
+    dependencies {
+
+    }
+}
